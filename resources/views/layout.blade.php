@@ -17,7 +17,7 @@
                 <div class="row mb-3">
                     @include('header')
                 </div>
-                <div class="row mb-3 bg-dark text-light">
+                <div class="row mb-3 text-light">
                     @yield('content')
                 </div>
                 <div class="row">
