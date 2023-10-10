@@ -13,7 +13,7 @@ class Controller extends BaseController
 {
     public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $articles = Article::all();
+        $articles = Article::all()->take(3);
 
        return view('home', [
            'articles' => $articles

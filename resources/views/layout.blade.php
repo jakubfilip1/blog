@@ -6,13 +6,24 @@
 
         <title>TEST</title>
 
+        <style></style>
+
         @vite(['resources/js/app.js', 'resources/css/app.css'])
 
     </head>
-    <body>
-        <div class="container">
-            @include('header')
-            @yield('content')
+    <body class="vh-100">
+        <div class="container-fluid bg-danger min-vh-100">
+            <div class="container p-3">
+                <div class="row mb-3">
+                    @include('header')
+                </div>
+                <div class="row mb-3 bg-dark text-light">
+                    @yield('content')
+                </div>
+                <div class="row">
+                    @include('footer')
+                </div>
+            </div>
         </div>
     </body>
 </html>
