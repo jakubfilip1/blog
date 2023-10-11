@@ -17,6 +17,16 @@ Route::get('/', [\App\Http\Controllers\Controller::class, 'index'])->name('home'
 
 Route::get('/article/{id}', [\App\Http\Controllers\Controller::class, 'article'])->name('article');
 
+Route::get('/addArticle', [\App\Http\Controllers\Controller::class, 'addArticle'])->name('addArticle');
+
+Route::post('/addArticle', [\App\Http\Controllers\Controller::class, 'addArticlePost'])->name('addArticle');
+
+Route::post('/article/{id}/delete', [\App\Http\Controllers\Controller::class, 'articleDelete'])->name('articleDelete');
+
 Route::post('/comments', [\App\Http\Controllers\CommentsController::class, 'index'])->name('comments');
 
-Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact');
+Route::get('/login', [\App\Http\Controllers\LoginController::class, 'index'])->name('login');
+
+Route::post('/login', [\App\Http\Controllers\LoginController::class, 'login'])->name('login');
+
+Route::get('/logout', [\App\Http\Controllers\LoginController::class, 'logout'])->name('logout');

@@ -8,8 +8,17 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">Strona Główna</a>
                 </li>
+                @if(session('admin_login'))
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('addArticle') ? 'active' : '' }}" href="{{ route('addArticle') }}">Add Article</a>
+                    </li>
+                @endif
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Kontakt</a>
+                    @if(session('admin_login'))
+                        <a class="nav-link {{ request()->is('login') ? 'active' : '' }}" href="{{ route('logout') }}">Logout</a>
+                    @else
+                        <a class="nav-link {{ request()->is('login') ? 'active' : '' }}" href="{{ route('login') }}">Login</a>
+                    @endif
                 </li>
             </ul>
         </div>

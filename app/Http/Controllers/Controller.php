@@ -14,7 +14,7 @@ class Controller extends BaseController
 {
     public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $articles = Article::all()->take(5);
+        $articles = Article::query()->orderBy('created_at', 'DESC')->take(5)->get();
 
        return view('home', [
            'articles' => $articles
@@ -25,11 +25,50 @@ class Controller extends BaseController
     {
         $article = Article::all()->find($id);
 
-        $comments = Comment::all()->where('article_id', '=', $id)->take(3)->all();
+        $comments = Comment::query()->where('article_id', '=', $id)->orderBy('created_at', 'DESC')->get();
 
         return view('article', [
             'article' => $article,
             'comments' => $comments
+        ]);
+    }
+
+    public function addArticle(): mixed
+    {
+        if(!session('admin_login'))
+        {
+            return redirect()->route('home');
+        }
+
+        return view('addArticle');
+    }
+
+    public function articleDelete($id): \Illuminate\Http\RedirectResponse
+    {
+        if(!session('admin_login'))
+        {
+            return redirect()->route('home');
+        }
+
+        Article::query()->where('id', '=', $id)->delete();
+
+        return redirect()->route('home');
+    }
+
+    public function addArticlePost(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        if(!session('admin_login'))
+        {
+            return redirect()->route('home');
+        }
+
+        $model = Article::query()->create([
+           'title' => $request->get('title'),
+           'content' => $request->get('message')
+        ]);
+
+        return redirect()->route('article', [
+            'id' => $model->id
         ]);
     }
 }

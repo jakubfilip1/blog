@@ -9,7 +9,7 @@
                             {{ $article->title }}
                         </a>
                     </h2>
-                    <p class="card-text">{{ $article->content  }}</p>
+                    <p class="card-text">{!! $article->content  !!}</p>
                     <p class="card-text"><small class="text-muted"> DATA</small></p>
                 </div>
             </div>
@@ -18,7 +18,6 @@
         @if(!empty($comments))
         <div class="container bg-dark mb-3">
                 @foreach($comments as $comment)
-                    <hr>
                     <div class="row">
                         <div class="p-4 container">
                             <h5 class="card-title mb-3">
@@ -30,7 +29,6 @@
                         </div>
                     </div>
                 @endforeach
-                <hr>
         </div>
         @endif
 
@@ -42,15 +40,15 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label">Imię</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Imię">
+                                <input required type="text" class="form-control" id="name" name="name" placeholder="Imię">
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="E-mail">
+                                <input required type="email" class="form-control" id="email" name="email" placeholder="E-mail">
                             </div>
                             <div class="mb-3">
                                 <label for="message" class="form-label">Wiadomość</label>
-                                <textarea class="form-control" id="message" name="message" placeholder="Wiadomość"></textarea>
+                                <textarea required class="form-control" id="message" name="message" placeholder="Wiadomość"></textarea>
                             </div>
                             <input type="hidden" id="articleId" name="articleId" value="{{ $article->id }}">
                             <button type="submit" class="btn btn-primary mb-3">Wyślij</button>
